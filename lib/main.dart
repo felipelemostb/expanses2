@@ -37,40 +37,9 @@ class MyHomePage extends StatefulWidget {
 
 //Modelo com as transacoes fixas
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _transactions = [
-    Transaction(
-        id: 't0',
-        title: 'Supermercado',
-        value: 400.00,
-        date: DateTime.now().subtract(Duration(days: 1))),
-    Transaction(
-        id: 't1',
-        title: 'Aluguel',
-        value: 910.76,
-        date: DateTime.now().subtract(Duration(days: 3))),
-    Transaction(
-        id: 't2',
-        title: 'Internet',
-        value: 80.30,
-        date: DateTime.now().subtract(Duration(days: 4))),
-    Transaction(
-        id: 't3',
-        title: 'Extras',
-        value: 40.10,
-        date: DateTime.now().subtract(Duration(days: 1))),
-    Transaction(
-      id: 't4',
-      title: 'Sushi',
-      value: 100.00,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't5',
-      title: 'Estudos',
-      value: 200.00,
-      date: DateTime.now(),
-    ),
-  ];
+  final List<Transaction> _transactions = [];
+
+
 
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
@@ -80,12 +49,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
 //controle de adiocao de transacoes
 //necessida de um texto title e um valor double
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime date) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       value: value,
-      date: DateTime.now(),
+      date: date,
     );
 
 //sempre que adicionado uma transacao o setstate
@@ -97,6 +66,12 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
     Navigator.of(context).pop();
+  }
+  _removeTransaction(String id){
+    setState(() {
+      _transactions.removeWhere((tr) => tr.id == id);
+      });
+    
   }
 
 //modal utilizado para abrir o formulario apenas quando for
@@ -152,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
               //AQUI A LISTA DE TRANSACOES COM TODOS PARAMETROS
               //E MODELOS PRE DEFINIDOS, APENAS IMPORTADO E INVOCADO
-              TransactionList(_transactions),
+              TransactionList(_transactions, _removeTransaction),
             ],
           ),
         ),

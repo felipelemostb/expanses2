@@ -5,8 +5,9 @@ import 'package:intl/intl.dart';
 class TransactionList extends StatelessWidget {
   //DEFININDO QUE TRANSACTIONS SERA DO TIPO LIST
   final List<Transaction> transactions;
+  final void Function(String) onRemove; 
 
-  TransactionList(this.transactions);
+  TransactionList(this.transactions, this.onRemove);
 
   @override
   Widget build(BuildContext context) {
@@ -17,17 +18,21 @@ class TransactionList extends StatelessWidget {
       child: transactions.isEmpty
           ? Column(
               children: <Widget>[
+                SizedBox(
+                  height: 50,
+                ),
                 Center(
                   child: Text('Nenhuma transacao cadastrada',
                       style: Theme.of(context).textTheme.headline6),
                 ),
                 SizedBox(
-                  height: 200,
+                  height: 150,
                 ),
                 Container(
                   height: 200,
                   child: Image.asset(
                     'assets/images/waiting.png',
+                    color: Colors.purple,
                     fit: BoxFit.cover,
                   ),
                 )
@@ -60,6 +65,11 @@ class TransactionList extends StatelessWidget {
                     ),
                     subtitle: Text(
                       DateFormat('d MMM y').format(tr.date),
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.delete),
+                      color: Colors.red,
+                      onPressed: () => onRemove(tr.id),
                     ),
                   ),
                 );
