@@ -31,7 +31,7 @@ class ChartBar extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.purple,
+                      color: Colors.black,
                       width: 1.0,
                     ),
                     color: Color.fromRGBO(220, 220, 220, 1),
@@ -41,7 +41,7 @@ class ChartBar extends StatelessWidget {
                 heightFactor: percentage,
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
+                      color: Colors.purple,
                       borderRadius: BorderRadius.circular(5)),
                 ),
               ),

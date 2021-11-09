@@ -19,7 +19,7 @@ class _TransactionFormState extends State<TransactionForm> {
   final _valueController = TextEditingController();
 
   DateTime _selectedDate = DateTime.now();
-  
+
   //O SUBMIT FORMA EH A FORMA QUE O FORMULARIO DEVE SER PREENCHIDO
   //ELE EXPERA RECEBER O TITLE E O VALUE, CASO SEJAM NULOS ELE RETORNA PARA O PREENCHIMENTO
   //APOS PREENCHER ELE ADICIONA A LISTA COM O METODO onSUBMIT
@@ -27,27 +27,26 @@ class _TransactionFormState extends State<TransactionForm> {
     final title = _titleController.text;
     final value = double.tryParse(_valueController.text) ?? 0.0;
 
-    if (title.isEmpty || value <= 0 || _selectedDate == null ) {
+    if (title.isEmpty || value <= 0 || _selectedDate == null) {
       return;
     }
     //acessa as funcoes que foram definidas por parametro na linha 5 e 7
     widget.onSubmit(title, value, _selectedDate);
   }
 
-  _showDatePicker(){
+  _showDatePicker() {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2020),
       lastDate: DateTime.now(),
-    ).then((pickedDate){
-      if(pickedDate ==null){
+    ).then((pickedDate) {
+      if (pickedDate == null) {
         return;
       }
       setState(() {
-         _selectedDate = pickedDate;
+        _selectedDate = pickedDate;
       });
-     
     });
   }
 
@@ -78,24 +77,27 @@ class _TransactionFormState extends State<TransactionForm> {
             ),
             Container(
               height: 70,
-              child: Row(children: <Widget>[
-                Expanded(
-                  child: Text(
-                    _selectedDate == null ?  'Nenhuma Data!': 'Data ${DateFormat('d/M/y').format(_selectedDate,)}'),
-                ),
-               
-                TextButton(
-                 child: Text("Selecionar data",
-                 style: TextStyle(
-                   color: Colors.purple,
-                   fontWeight: FontWeight.bold,
-                   fontSize: 16
-                 ),
-                 ),
-                onPressed:_showDatePicker
-                ,
-                 ),
-              ],),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(_selectedDate == null
+                        ? 'Nenhuma Data!'
+                        : 'Data ${DateFormat('d/M/y').format(
+                            _selectedDate,
+                          )}'),
+                  ),
+                  TextButton(
+                    child: Text(
+                      "Selecionar data",
+                      style: TextStyle(
+                          color: Colors.purple,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ),
+                    onPressed: _showDatePicker,
+                  ),
+                ],
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -103,7 +105,7 @@ class _TransactionFormState extends State<TransactionForm> {
                 ElevatedButton(
                   child: Text(
                     'Nova Transação',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.yellow),
                   ),
                   //DEFININDO QUE AO PREENCHIDO ELE VAI SUBMETER
                   onPressed: _submitForm,

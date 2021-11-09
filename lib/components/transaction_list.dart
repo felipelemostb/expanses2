@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 class TransactionList extends StatelessWidget {
   //DEFININDO QUE TRANSACTIONS SERA DO TIPO LIST
   final List<Transaction> transactions;
-  final void Function(String) onRemove; 
+  final void Function(String) onRemove;
 
   TransactionList(this.transactions, this.onRemove);
 
@@ -32,7 +32,6 @@ class TransactionList extends StatelessWidget {
                   height: 200,
                   child: Image.asset(
                     'assets/images/waiting.png',
-                    color: Colors.purple,
                     fit: BoxFit.cover,
                   ),
                 )

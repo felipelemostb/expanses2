@@ -39,8 +39,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [];
 
-
-
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
       return tr.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
@@ -67,11 +65,11 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     Navigator.of(context).pop();
   }
-  _removeTransaction(String id){
+
+  _removeTransaction(String id) {
     setState(() {
       _transactions.removeWhere((tr) => tr.id == id);
-      });
-    
+    });
   }
 
 //modal utilizado para abrir o formulario apenas quando for
@@ -104,12 +102,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
 
           //BOTAO DE ACTION COM ABERTURA DE MODAL NO ONPRESSED
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () => _openTransactionFormModal(context),
-            ),
-          ],
         ),
 
         //SCROLLVIEW PARA NAO DAR ERRO DE OVERFLOW E POSSIBILITAR
@@ -134,8 +126,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
         //BOTAO COM A MESMA FUNCAO DO ANTERIOR, ABRIR O MODAL
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.purple.shade500,
-          child: Icon(Icons.add),
+          backgroundColor: Colors.purple,
+          child: Icon(
+            Icons.add,
+          ),
           onPressed: () => _openTransactionFormModal(context),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat);
